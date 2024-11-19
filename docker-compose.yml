@@ -1,0 +1,7 @@
+services:
+  web:
+    image: crud-template
+    container_name: crud-template
+    build: .
+    ports:
+      - "8080:8080"
