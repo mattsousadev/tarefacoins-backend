@@ -1,16 +1,18 @@
-package br.mattsousa.crud_template.domain.services;
+package br.mattsousa.domain.services;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.mattsousa.crud_template.data.models.UserModel;
-import br.mattsousa.crud_template.data.repository.UserRepository;
+import br.mattsousa.data.models.UserModel;
+import br.mattsousa.data.repository.UserRepository;
 
 @Service
 public class UsersService {
 
+    @Autowired
     private UserRepository usersRepository;
 
     public List<UserModel> getAllUsers() {

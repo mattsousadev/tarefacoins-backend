@@ -1,4 +1,4 @@
-package br.mattsousa.crud_template.data.models;
+package br.mattsousa.data.models;
 
 import java.time.LocalDate;
 

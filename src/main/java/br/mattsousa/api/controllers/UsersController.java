@@ -1,4 +1,4 @@
-package br.mattsousa.crud_template.api.controllers;
+package br.mattsousa.api.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.mattsousa.crud_template.data.models.UserModel;
-import br.mattsousa.crud_template.domain.exceptions.UserNotFoundException;
-import br.mattsousa.crud_template.domain.services.UsersService;
+import br.mattsousa.data.models.UserModel;
+import br.mattsousa.domain.exceptions.UserNotFoundException;
+import br.mattsousa.domain.services.UsersService;
 
 @Service
 public class UsersController {

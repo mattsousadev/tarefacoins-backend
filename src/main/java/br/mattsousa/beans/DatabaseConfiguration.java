@@ -1,4 +1,4 @@
-package br.mattsousa.crud_template.beans;
+package br.mattsousa.beans;
 
 import java.util.logging.Logger;
 

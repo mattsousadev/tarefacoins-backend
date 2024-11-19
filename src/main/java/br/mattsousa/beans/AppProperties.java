@@ -1,4 +1,4 @@
-package br.mattsousa.crud_template.beans;
+package br.mattsousa.beans;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

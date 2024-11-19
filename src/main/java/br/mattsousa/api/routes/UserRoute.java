@@ -1,4 +1,4 @@
-package br.mattsousa.crud_template.api.routes;
+package br.mattsousa.api.routes;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.mattsousa.crud_template.api.controllers.UsersController;
-import br.mattsousa.crud_template.data.models.UserModel;
+import br.mattsousa.api.controllers.UsersController;
+import br.mattsousa.data.models.UserModel;
 
 @RestController
 @RequestMapping("/users")
