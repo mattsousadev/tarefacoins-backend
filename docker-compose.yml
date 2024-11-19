@@ -2,6 +2,14 @@ services:
   web:
     image: crud-template
     container_name: crud-template
+    networks:
+      - mysql-network
     build: .
+    env_file:
+      - .env
     ports:
       - "8080:8080"
+
+networks:
+  mysql-network:
+    external: true
