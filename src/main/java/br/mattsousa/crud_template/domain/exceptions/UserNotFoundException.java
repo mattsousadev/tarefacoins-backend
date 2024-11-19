@@ -1,4 +1,4 @@
-package br.mattsousa.crud_template.exceptions;
+package br.mattsousa.crud_template.domain.exceptions;
 
 public class UserNotFoundException extends AppException {
     public UserNotFoundException(String message) {
