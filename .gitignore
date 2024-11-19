@@ -34,4 +34,4 @@ build/
 
 ### App ###
 .env
-data/
+/data/
