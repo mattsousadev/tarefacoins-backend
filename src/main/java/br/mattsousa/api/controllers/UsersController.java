@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.mattsousa.api.requests.CreateUsersRequest;
 import br.mattsousa.api.requests.UpdateUserRequest;
+import br.mattsousa.data.models.FilesModel;
 import br.mattsousa.data.models.UsersModel;
 import br.mattsousa.domain.exceptions.EmailAlreadyRegisteredException;
 import br.mattsousa.domain.exceptions.ErrorLoadingFileException;
@@ -20,6 +21,7 @@ import br.mattsousa.domain.exceptions.UserNotFoundException;
 import br.mattsousa.domain.services.FileService;
 import br.mattsousa.domain.services.UsersService;
 import br.mattsousa.utils.Utils;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UsersController {
@@ -63,15 +65,16 @@ public class UsersController {
         usersService.updateUser(user, request);
     }
 
+    @Transactional
     public void upload(String id, MultipartFile file) {
         UsersModel user = getById(id);
-        byte[] fileBytes = null;
+        FilesModel filesModel = null;
         try {
-            fileBytes = file.getBytes();
+            filesModel = fileService.createFile(file);
         } catch (IOException e) {
-            throw new InvalidFileException("Invalid file");
+            throw new ErrorLoadingFileException("Error loading file");
         }
-        usersService.uploadFile(user, fileBytes);
+        usersService.uploadFile(user, filesModel);
     }
 
     public Resource download(String id) {

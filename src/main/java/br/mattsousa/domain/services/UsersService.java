@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.mattsousa.api.requests.CreateUsersRequest;
 import br.mattsousa.api.requests.UpdateUserRequest;
+import br.mattsousa.data.models.FilesModel;
 import br.mattsousa.data.models.UsersModel;
 import br.mattsousa.data.repository.UsersRepository;
 import br.mattsousa.utils.Utils;
@@ -64,8 +65,8 @@ public class UsersService {
         usersRepository.save(user);
     }
 
-    public void uploadFile(UsersModel user, byte[] fileBytes) {
-        user.setBirthCertificate(fileBytes);
+    public void uploadFile(UsersModel user, FilesModel file) {
+        user.setBirthCertificate(file);
         usersRepository.save(user);
     }
     
