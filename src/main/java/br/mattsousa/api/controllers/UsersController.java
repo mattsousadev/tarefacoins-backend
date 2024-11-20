@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,9 +13,11 @@ import br.mattsousa.api.requests.CreateUsersRequest;
 import br.mattsousa.api.requests.UpdateUserRequest;
 import br.mattsousa.data.models.UsersModel;
 import br.mattsousa.domain.exceptions.EmailAlreadyRegisteredException;
+import br.mattsousa.domain.exceptions.ErrorLoadingFileException;
 import br.mattsousa.domain.exceptions.InvalidDateFormatException;
 import br.mattsousa.domain.exceptions.InvalidFileException;
 import br.mattsousa.domain.exceptions.UserNotFoundException;
+import br.mattsousa.domain.services.FileService;
 import br.mattsousa.domain.services.UsersService;
 import br.mattsousa.utils.Utils;
 
@@ -23,6 +26,9 @@ public class UsersController {
 
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private FileService fileService;
 
     public List<UsersModel> listAll() {
         return usersService.getAllUsers();
@@ -66,5 +72,16 @@ public class UsersController {
             throw new InvalidFileException("Invalid file");
         }
         usersService.uploadFile(user, fileBytes);
+    }
+
+    public Resource download(String id) {
+        UsersModel user = getById(id);
+        if(user.getBirthCertificate() == null)
+            throw new InvalidFileException("No file uploaded");
+        try {
+            return fileService.createTempFile(user.getBirthCertificate());
+        } catch (IOException e) {
+           throw new ErrorLoadingFileException("Error loading file");
+        }
     }
 }

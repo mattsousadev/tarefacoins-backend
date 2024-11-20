@@ -3,7 +3,9 @@ package br.mattsousa.api.routes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,5 +68,15 @@ public class UsersRoute {
         usersController.upload(id, file);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}/download")
+    public ResponseEntity<Resource> getMethodName(@PathVariable String id) {
+        Resource resource = usersController.download(id);
+        return ResponseEntity.ok()
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .header("Content-Disposition", "attachment; filename=\"" + resource.getFilename() + "\"")
+            .body(resource);
+    }
+    
     
 }
