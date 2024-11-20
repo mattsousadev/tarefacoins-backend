@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import br.mattsousa.api.requests.CreateUsersRequest;
 import br.mattsousa.data.models.UsersModel;
 import br.mattsousa.domain.exceptions.EmailAlreadyRegisteredException;
+import br.mattsousa.domain.exceptions.InvalidDateFormatException;
 import br.mattsousa.domain.exceptions.UserNotFoundException;
 import br.mattsousa.domain.services.UsersService;
+import br.mattsousa.utils.Utils;
 
 @Service
 public class UsersController {
@@ -32,6 +34,8 @@ public class UsersController {
     public UsersModel create(CreateUsersRequest request) {
         if(usersService.checkEmailExists(request.email()))
             throw new EmailAlreadyRegisteredException("Email already exists");
+        if(!Utils.matchDateFormat(request.birthDate()))
+            throw new InvalidDateFormatException("Invalid date format");
         return usersService.createUser(request);
     }
 }

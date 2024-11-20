@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.mattsousa.api.requests.CreateUsersRequest;
 import br.mattsousa.data.models.UsersModel;
 import br.mattsousa.data.repository.UsersRepository;
+import br.mattsousa.utils.Utils;
 
 @Service
 public class UsersService {
@@ -28,7 +29,7 @@ public class UsersService {
     public UsersModel createUser(CreateUsersRequest request) {
         UsersModel newUser = new UsersModel();
         LocalDate birthDate = LocalDate.parse(request.birthDate());
-        Integer serialNumber = (int) (Math.random() * 10000);
+        Integer serialNumber = Utils.getSerialNumber();
         newUser.setName(request.name());
         newUser.setEmail(request.email());
         newUser.setIsActive(request.isActive() == null ? true : request.isActive());
