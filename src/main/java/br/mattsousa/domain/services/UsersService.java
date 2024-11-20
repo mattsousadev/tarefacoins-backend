@@ -28,7 +28,7 @@ public class UsersService {
 
     public UsersModel createUser(CreateUsersRequest request) {
         UsersModel newUser = new UsersModel();
-        LocalDate birthDate = LocalDate.parse(request.birthDate());
+        LocalDate birthDate = Utils.getLocalDate(request.birthDate());
         Integer serialNumber = Utils.getSerialNumber();
         newUser.setName(request.name());
         newUser.setEmail(request.email());
@@ -41,6 +41,10 @@ public class UsersService {
 
     public boolean checkEmailExists(String email) {
         return usersRepository.findByEmail(email).isPresent();
+    }
+
+    public void deleteUser(UsersModel user) {
+        usersRepository.delete(user);
     }
     
 }

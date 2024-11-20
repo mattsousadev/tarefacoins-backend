@@ -38,4 +38,9 @@ public class UsersController {
             throw new InvalidDateFormatException("Invalid date format");
         return usersService.createUser(request);
     }
+
+    public void delete(String id) {
+        UsersModel user = getById(id);
+        usersService.deleteUser(user);
+    }
 }
