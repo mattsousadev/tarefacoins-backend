@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.mattsousa.api.controllers.UsersController;
 import br.mattsousa.api.requests.CreateUsersRequest;
@@ -57,4 +59,12 @@ public class UsersRoute {
         usersController.update(id, request);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}/upload")
+    public ResponseEntity<Void> upload(@PathVariable String id,
+        @RequestParam(required = true) MultipartFile file) {
+        usersController.upload(id, file);
+        return ResponseEntity.noContent().build();
+    }
+    
 }

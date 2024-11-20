@@ -63,5 +63,10 @@ public class UsersService {
         
         usersRepository.save(user);
     }
+
+    public void uploadFile(UsersModel user, byte[] fileBytes) {
+        user.setBirthCertificate(fileBytes);
+        usersRepository.save(user);
+    }
     
 }
