@@ -33,7 +33,7 @@ public class UsersModel extends BaseEntity {
     private String email;
 
     @Column(nullable = false)
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     @Column(nullable = false)
     private Integer serialNumber;

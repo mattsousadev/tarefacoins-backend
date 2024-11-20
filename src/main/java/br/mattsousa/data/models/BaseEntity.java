@@ -2,8 +2,8 @@ package br.mattsousa.data.models;
 
 import java.time.Instant;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -14,9 +14,9 @@ import lombok.Setter;
 @Setter
 public abstract class BaseEntity {
     
-    @CreatedDate
+    @CreationTimestamp
     private Instant createdAt;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     private Instant updatedAt;
 }

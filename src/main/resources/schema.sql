@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS users (
     serial_number INTEGER NOT NULL,
     birth_date DATE NOT NULL,
     birth_certificate blob,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL 
 );
