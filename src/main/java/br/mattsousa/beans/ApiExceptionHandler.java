@@ -36,10 +36,10 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {AppException.class})
     protected ResponseEntity<ErrorResponse> handleAppException(AppException ex, WebRequest request) {
         ErrorResponse body = new ErrorResponse();
-        body.setSuccess(false);
-        body.setCode(HttpStatus.BAD_REQUEST.value());
+        body.setSuccess(ex.getStatus().is2xxSuccessful());
+        body.setCode(ex.getStatus().value());
         body.setMessage(ex.getMessage());
-        return ResponseEntity.badRequest().body(body);
+        return ResponseEntity.status(ex.getStatus()).body(body);
     }
 
 
