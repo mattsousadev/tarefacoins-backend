@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.mattsousa.api.controllers.UsersController;
 import br.mattsousa.api.requests.CreateUsersRequest;
+import br.mattsousa.api.requests.UpdateUserRequest;
 import br.mattsousa.data.models.UsersModel;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -46,6 +49,12 @@ public class UsersRoute {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         usersController.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable String id, @RequestBody UpdateUserRequest request) {
+        usersController.update(id, request);
         return ResponseEntity.noContent().build();
     }
 }

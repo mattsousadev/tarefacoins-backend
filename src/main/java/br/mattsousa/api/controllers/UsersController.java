@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.mattsousa.api.requests.CreateUsersRequest;
+import br.mattsousa.api.requests.UpdateUserRequest;
 import br.mattsousa.data.models.UsersModel;
 import br.mattsousa.domain.exceptions.EmailAlreadyRegisteredException;
 import br.mattsousa.domain.exceptions.InvalidDateFormatException;
@@ -42,5 +43,14 @@ public class UsersController {
     public void delete(String id) {
         UsersModel user = getById(id);
         usersService.deleteUser(user);
+    }
+
+    public void update(String id, UpdateUserRequest request) {
+        if(request.email() != null && usersService.checkEmailExists(request.email()))
+            throw new EmailAlreadyRegisteredException("Email already exists");
+        if(request.birthDate() != null && !Utils.matchDateFormat(request.birthDate()))
+            throw new InvalidDateFormatException("Invalid date format");
+        UsersModel user = getById(id);
+        usersService.updateUser(user, request);
     }
 }
