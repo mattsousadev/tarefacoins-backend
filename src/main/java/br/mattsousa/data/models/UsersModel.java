@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "users")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class UserModel extends BaseEntity {
+public class UsersModel extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
