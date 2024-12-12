@@ -1,9 +1,10 @@
 services:
   web:
-    image: crud-template
-    container_name: crud-template
+    image: tarefacoin-backend
+    container_name: tarefacoin-backend
     networks:
       - mysql-network
+      - tarefacoin-net
     build: .
     env_file:
       - .env
@@ -11,5 +12,7 @@ services:
       - "8080:8080"
 
 networks:
+  tarefacoin-net:
+    external: true
   mysql-network:
     external: true

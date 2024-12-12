@@ -10,10 +10,10 @@
 		<relativePath />
 	</parent>
 	<groupId>br.mattsousa</groupId>
-	<artifactId>crud-template</artifactId>
+	<artifactId>tarefacoin-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>crud-template</name>
-	<description>Projeto com template de CRUD</description>
+	<name>tarefacoin-backend</name>
+	<description>Projeto template usado para projeto Tarefacoin</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
