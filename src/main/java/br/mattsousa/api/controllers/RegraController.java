@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.mattsousa.api.requests.CreateRegraRequest;
 import br.mattsousa.data.models.RegraModel;
 import br.mattsousa.domain.services.RegraService;
 
@@ -16,6 +17,11 @@ public class RegraController {
 
     public List<RegraModel> list() {
         return regraService.getAllRegras();
+    }
+
+    public String create(CreateRegraRequest request) {
+        RegraModel newRegra = regraService.createRegra(request);
+        return newRegra.getId();
     }
     
 }
