@@ -24,5 +24,13 @@ public class RegraService {
         newRegra.setNome(request.nome());
         return regraRepository.save(newRegra);
     }
+
+    public void deleteRegra(String id) {
+        regraRepository.deleteById(id);
+    }
+
+    public boolean checkRegraExists(String id) {
+        return regraRepository.existsById(id);
+    }
     
 }
