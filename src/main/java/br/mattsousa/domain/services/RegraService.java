@@ -32,5 +32,11 @@ public class RegraService {
     public boolean checkRegraExists(String id) {
         return regraRepository.existsById(id);
     }
+
+    public void updateRegra(String id, CreateRegraRequest request) {
+        RegraModel regra = regraRepository.findById(id).get();
+        regra.setNome(request.nome());
+        regraRepository.save(regra);
+    }
     
 }

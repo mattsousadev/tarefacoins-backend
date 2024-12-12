@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -44,4 +46,9 @@ public class RegraRoute {
         return ResponseEntity.noContent().build();
     }
     
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable String id, @RequestBody CreateRegraRequest request) {
+        regraController.update(id, request);
+        return ResponseEntity.noContent().build();
+    }
 }

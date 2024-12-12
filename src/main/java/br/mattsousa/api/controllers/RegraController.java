@@ -34,5 +34,14 @@ public class RegraController {
         }
         regraService.deleteRegra(id);
     }
+
+    public void update(String id, CreateRegraRequest request) {
+        if (!regraService.checkRegraExists(id)){
+            RegraNotFoundException e = new RegraNotFoundException("Registro não encontrado");
+            e.setStatus(HttpStatus.NOT_FOUND);
+            throw e;
+        }
+        regraService.updateRegra(id, request);
+    }
     
 }
