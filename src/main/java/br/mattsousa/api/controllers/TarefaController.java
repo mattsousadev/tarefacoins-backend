@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.mattsousa.api.requests.CreateTarefaRequest;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
+import br.mattsousa.domain.exceptions.TarefaNotFoundException;
 import br.mattsousa.domain.services.TarefaService;
 
 @Service
@@ -31,6 +32,24 @@ public class TarefaController {
         newTarefa.setAtivo(request.ativo());
         newTarefa = tarefaService.createTarefa(newTarefa);
         return newTarefa.getId();
+    }
+
+    public TarefaModel getTarefa(String id) {
+        if (!tarefaService.checkTarefaExists(id)) {
+            throw new TarefaNotFoundException("Tarefa não encontrada");
+        }
+        return tarefaService.getTarefa(id);
+    }
+
+    public TarefasPublicadasModel getPublishedTarefa(String id) {
+        if (!tarefaService.checkTarefaExists(id)) {
+            throw new TarefaNotFoundException("Tarefa não encontrada");
+        }
+
+        if (!tarefaService.checkTarefaPublicada(id)) {
+            throw new TarefaNotFoundException("Tarefa não publicada");
+        }
+        return tarefaService.getPublishedTarefa(id);
     }
     
 }

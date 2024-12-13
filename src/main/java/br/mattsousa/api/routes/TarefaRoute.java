@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,10 +31,20 @@ public class TarefaRoute {
     public ResponseEntity<List<TarefaModel>> list() {
         return ResponseEntity.ok().body(tarefaController.list());
     }
+
+    @GetMapping("id/{id}")
+    public ResponseEntity<TarefaModel> getTarefa(@PathVariable String id) {
+        return ResponseEntity.ok().body(tarefaController.getTarefa(id));
+    }
     
     @GetMapping("/publicadas")
     public ResponseEntity<List<TarefasPublicadasModel>> listPublished() {
         return ResponseEntity.ok().body(tarefaController.listPublished());
+    }
+
+    @GetMapping("publicada/{id}")
+    public ResponseEntity<TarefasPublicadasModel> getPublishTarefa(@PathVariable String id) {
+        return ResponseEntity.ok().body(tarefaController.getPublishedTarefa(id));
     }
 
     @PostMapping

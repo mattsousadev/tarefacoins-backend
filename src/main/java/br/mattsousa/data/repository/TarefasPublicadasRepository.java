@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository;
 import br.mattsousa.data.models.TarefasPublicadasModel;
 
 @Repository
-public interface TarefasPublicadasRepository extends JpaRepository <TarefasPublicadasModel, Integer> {}
+public interface TarefasPublicadasRepository extends JpaRepository <TarefasPublicadasModel, Integer> {
+
+    TarefasPublicadasModel findOneByIdTarefa(String idTarefa);
+
+    boolean existsByIdTarefa(String id);
+}

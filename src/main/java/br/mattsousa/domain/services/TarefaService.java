@@ -33,5 +33,21 @@ public class TarefaService {
     public TarefaModel createTarefa(TarefaModel newTarefa) {
         return tarefaRepository.save(newTarefa);
     }
+
+    public boolean checkTarefaExists(String id) {
+        return tarefaRepository.existsById(id);
+    }
+
+    public TarefaModel getTarefa(String id) {
+        return tarefaRepository.findById(id).get();
+    }
+
+    public TarefasPublicadasModel getPublishedTarefa(String id) {
+        return tarefasPublicadasRepository.findOneByIdTarefa(id);
+    }
+
+    public boolean checkTarefaPublicada(String id) {
+        return tarefasPublicadasRepository.existsByIdTarefa(id);
+    }
     
 }
