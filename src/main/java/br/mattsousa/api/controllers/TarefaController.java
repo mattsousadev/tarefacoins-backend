@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.mattsousa.api.requests.CreateTarefaRequest;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
 import br.mattsousa.domain.services.TarefaService;
@@ -21,6 +22,15 @@ public class TarefaController {
 
     public List<TarefasPublicadasModel> listPublished() {
         return tarefaService.listPublished();
+    }
+
+    public String create(CreateTarefaRequest request) {
+        TarefaModel newTarefa = new TarefaModel();
+        newTarefa.setNome(request.nome());
+        newTarefa.setDescricao(request.descricao());
+        newTarefa.setAtivo(request.ativo());
+        newTarefa = tarefaService.createTarefa(newTarefa);
+        return newTarefa.getId();
     }
     
 }

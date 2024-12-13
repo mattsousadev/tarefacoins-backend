@@ -29,5 +29,9 @@ public class TarefaService {
         Sort sort = Sort.by(Direction.DESC, "dataCriacaoTarefa");
         return tarefasPublicadasRepository.findAll(sort);
     }
+
+    public TarefaModel createTarefa(TarefaModel newTarefa) {
+        return tarefaRepository.save(newTarefa);
+    }
     
 }
