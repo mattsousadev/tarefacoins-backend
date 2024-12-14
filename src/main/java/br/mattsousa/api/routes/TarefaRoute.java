@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.mattsousa.api.controllers.TarefaController;
 import br.mattsousa.api.requests.CreateTarefaRequest;
+import br.mattsousa.api.requests.PublicacaoTarefaRequest;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
 import jakarta.validation.Valid;
@@ -53,6 +54,15 @@ public class TarefaRoute {
         
         String response = tarefaController.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    
+
+    @PostMapping("{id}/publicacao")
+    public ResponseEntity<Void> publish(
+        @PathVariable String id,
+        @Valid @RequestBody PublicacaoTarefaRequest entity) {
+        tarefaController.publish(id, entity);
+        return ResponseEntity.noContent().build();
     }
     
 }

@@ -7,8 +7,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import br.mattsousa.data.models.PublicacaoModel;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
+import br.mattsousa.data.repository.PublicacaoRepository;
 import br.mattsousa.data.repository.TarefaRepository;
 import br.mattsousa.data.repository.TarefasPublicadasRepository;
 
@@ -17,6 +19,9 @@ public class TarefaService {
 
     @Autowired
     private TarefaRepository tarefaRepository;
+
+    @Autowired
+    private PublicacaoRepository publicacaoRepository;
 
     @Autowired
     private TarefasPublicadasRepository tarefasPublicadasRepository;
@@ -48,6 +53,10 @@ public class TarefaService {
 
     public boolean checkTarefaPublicada(String id) {
         return tarefasPublicadasRepository.existsByIdTarefa(id);
+    }
+
+    public PublicacaoModel createPublicacao(PublicacaoModel newPublicacaoModel) {
+        return publicacaoRepository.save(newPublicacaoModel);
     }
     
 }

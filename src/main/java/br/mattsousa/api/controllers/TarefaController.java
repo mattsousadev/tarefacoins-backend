@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.mattsousa.api.requests.CreateTarefaRequest;
+import br.mattsousa.api.requests.PublicacaoTarefaRequest;
+import br.mattsousa.data.models.PublicacaoModel;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
 import br.mattsousa.domain.exceptions.TarefaNotFoundException;
@@ -50,6 +52,14 @@ public class TarefaController {
             throw new TarefaNotFoundException("Tarefa não publicada");
         }
         return tarefaService.getPublishedTarefa(id);
+    }
+
+    public void publish(String id, PublicacaoTarefaRequest request) {
+        TarefaModel tarefa = getTarefa(id);
+        PublicacaoModel newPublicacaoModel = new PublicacaoModel();
+        newPublicacaoModel.setTarefa(tarefa);
+        newPublicacaoModel.setRecompensa(request.recompensa());
+        tarefaService.createPublicacao(newPublicacaoModel);
     }
     
 }
