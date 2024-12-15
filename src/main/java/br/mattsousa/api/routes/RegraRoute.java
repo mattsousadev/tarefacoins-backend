@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.mattsousa.api.controllers.RegraController;
 import br.mattsousa.api.requests.CreateRegraRequest;
 import br.mattsousa.data.models.RegraModel;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class RegraRoute {
     }
     
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody CreateRegraRequest request) {
+    public ResponseEntity<String> create(@Valid @RequestBody CreateRegraRequest request) {
         String response = regraController.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

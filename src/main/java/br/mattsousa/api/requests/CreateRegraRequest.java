@@ -1,9 +1,9 @@
 package br.mattsousa.api.requests;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public record CreateRegraRequest (
     @NotBlank(message = "Campo obrigatório") 
-    @Max(value = 128, message = "Limite de 128 caracteres") String nome
+    @Size(max = 128, message = "Limite de 128 caracteres") String nome
 ){}
