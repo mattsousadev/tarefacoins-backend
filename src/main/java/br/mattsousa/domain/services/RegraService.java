@@ -38,5 +38,9 @@ public class RegraService {
         regra.setNome(request.nome());
         regraRepository.save(regra);
     }
+
+    public boolean checkIsApplied(String id) {
+        return regraRepository.isApplied(id);
+    }
     
 }

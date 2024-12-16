@@ -1,33 +1,31 @@
 package br.mattsousa.data.models;
 
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "regra")
+@Table(name = "regra_aplicada")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class RegraModel extends BaseEntity {
+public class RegraAplicadaModel extends BaseEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(nullable = false, length = 128)
-    private String nome;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_regra", referencedColumnName = "id")
+    private RegraModel idRegra;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idRegra")
-    private Set<RegraAplicadaModel> aplicacoesRegra;
+    @Column
+    private String idPublicacao;
 }

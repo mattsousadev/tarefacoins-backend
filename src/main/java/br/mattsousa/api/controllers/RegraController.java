@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.mattsousa.api.requests.CreateRegraRequest;
 import br.mattsousa.data.models.RegraModel;
+import br.mattsousa.domain.exceptions.RegraAlreadyAppliedException;
 import br.mattsousa.domain.exceptions.RegraNotFoundException;
 import br.mattsousa.domain.services.RegraService;
 
@@ -32,6 +33,11 @@ public class RegraController {
             e.setStatus(HttpStatus.NOT_FOUND);
             throw e;
         }
+
+        if(regraService.checkIsApplied(id)){
+            throw new RegraAlreadyAppliedException("Regra já está aplicada!");
+        }
+
         regraService.deleteRegra(id);
     }
 
