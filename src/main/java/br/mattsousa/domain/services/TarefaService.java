@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import br.mattsousa.api.requests.UpdateTarefaRequest;
 import br.mattsousa.data.models.PublicacaoModel;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
@@ -70,6 +71,17 @@ public class TarefaService {
         }
         
         tarefaRepository.delete(tarefaModel);
+    }
+
+    public void updateTarefa(String id, UpdateTarefaRequest request) {
+        TarefaModel tarefaModel = getTarefa(id);
+
+        tarefaModel.setNome(request.nome());
+        tarefaModel.setDescricao(request.descricao());
+        tarefaModel.setAtivo(request.ativo());
+
+        tarefaRepository.save(tarefaModel);
+
     }
     
 }

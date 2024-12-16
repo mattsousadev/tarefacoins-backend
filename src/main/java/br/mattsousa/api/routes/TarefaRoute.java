@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import br.mattsousa.api.controllers.TarefaController;
 import br.mattsousa.api.requests.CreateTarefaRequest;
 import br.mattsousa.api.requests.PublicacaoTarefaRequest;
+import br.mattsousa.api.requests.UpdateTarefaRequest;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -70,6 +73,14 @@ public class TarefaRoute {
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
         tarefaController.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<Void> update(
+        @PathVariable String id,
+        @Valid @RequestBody UpdateTarefaRequest request) {
+        tarefaController.update(id, request);
         return ResponseEntity.noContent().build();
     }
 }

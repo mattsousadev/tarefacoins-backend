@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.mattsousa.api.requests.CreateTarefaRequest;
 import br.mattsousa.api.requests.PublicacaoTarefaRequest;
+import br.mattsousa.api.requests.UpdateTarefaRequest;
 import br.mattsousa.data.models.PublicacaoModel;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
@@ -69,6 +70,14 @@ public class TarefaController {
             throw new TarefaNotFoundException("Tarefa não encontrada");
         }
         tarefaService.deleteTarefa(id);
+    }
+
+    public void update(String id, UpdateTarefaRequest request) {
+        if (!tarefaService.checkTarefaExists(id)) {
+            throw new TarefaNotFoundException("Tarefa não encontrada");
+        }
+
+        tarefaService.updateTarefa(id, request);
     }
     
 }
