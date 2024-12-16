@@ -1,6 +1,7 @@
 package br.mattsousa.domain.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -57,6 +58,18 @@ public class TarefaService {
 
     public PublicacaoModel createPublicacao(PublicacaoModel newPublicacaoModel) {
         return publicacaoRepository.save(newPublicacaoModel);
+    }
+
+    public void deleteTarefa(String id) {
+        TarefaModel tarefaModel = getTarefa(id);
+
+        Set<String> publicacoes = publicacaoRepository.findIdsByTarefa(tarefaModel);
+        
+        if(!publicacoes.isEmpty()) {
+            publicacaoRepository.deleteAllById(publicacoes);
+        }
+        
+        tarefaRepository.delete(tarefaModel);
     }
     
 }

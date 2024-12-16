@@ -12,6 +12,7 @@ import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
 import br.mattsousa.domain.exceptions.TarefaNotFoundException;
 import br.mattsousa.domain.services.TarefaService;
+import jakarta.transaction.Transactional;
 
 @Service
 public class TarefaController {
@@ -60,6 +61,14 @@ public class TarefaController {
         newPublicacaoModel.setTarefa(tarefa);
         newPublicacaoModel.setRecompensa(request.recompensa());
         tarefaService.createPublicacao(newPublicacaoModel);
+    }
+
+    @Transactional
+    public void delete(String id) {
+        if (!tarefaService.checkTarefaExists(id)) {
+            throw new TarefaNotFoundException("Tarefa não encontrada");
+        }
+        tarefaService.deleteTarefa(id);
     }
     
 }
