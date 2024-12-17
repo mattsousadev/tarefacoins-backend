@@ -13,6 +13,7 @@ import br.mattsousa.data.models.PublicacaoModel;
 import br.mattsousa.data.models.TarefaModel;
 import br.mattsousa.data.models.TarefasPublicadasModel;
 import br.mattsousa.data.repository.PublicacaoRepository;
+import br.mattsousa.data.repository.RegraAplicadaRepository;
 import br.mattsousa.data.repository.TarefaRepository;
 import br.mattsousa.data.repository.TarefasPublicadasRepository;
 
@@ -24,6 +25,9 @@ public class TarefaService {
 
     @Autowired
     private PublicacaoRepository publicacaoRepository;
+
+    @Autowired
+    private RegraAplicadaRepository regraAplicadaRepository;
 
     @Autowired
     private TarefasPublicadasRepository tarefasPublicadasRepository;
@@ -65,11 +69,14 @@ public class TarefaService {
         TarefaModel tarefaModel = getTarefa(id);
 
         Set<String> publicacoes = publicacaoRepository.findIdsByTarefa(tarefaModel);
-        
-        if(!publicacoes.isEmpty()) {
+
+        if (!publicacoes.isEmpty()) {
+            for (String idPublicacao : publicacoes) {
+                regraAplicadaRepository.deleteAllByIdPublicacao(idPublicacao);
+            }
             publicacaoRepository.deleteAllById(publicacoes);
         }
-        
+
         tarefaRepository.delete(tarefaModel);
     }
 
@@ -83,5 +90,5 @@ public class TarefaService {
         tarefaRepository.save(tarefaModel);
 
     }
-    
+
 }
